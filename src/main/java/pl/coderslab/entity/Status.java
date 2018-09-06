@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class TaskStatus {
+public class Status {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -14,7 +14,7 @@ public class TaskStatus {
     private boolean active;
     private int sortStatus;
 
-    public TaskStatus() {
+    public Status() {
     }
 
     public int getId() {

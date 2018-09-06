@@ -15,7 +15,7 @@ public class Task {
     private String subject;
     private Project project;
     private String description;
-    private TaskStatus taskStatus;
+    private Status status;
     private Priority priority;
     private User user;
 
@@ -62,12 +62,12 @@ public class Task {
         this.description = description;
     }
 
-    public TaskStatus getTaskStatus() {
-        return taskStatus;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setTaskStatus(TaskStatus taskStatus) {
-        this.taskStatus = taskStatus;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public Priority getPriority() {
