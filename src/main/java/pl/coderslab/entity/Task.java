@@ -1,9 +1,9 @@
 package pl.coderslab.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.hibernate.annotations.CreationTimestamp;
+
+import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
@@ -11,12 +11,17 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private Date createDate;
+    @CreationTimestamp
+    private Timestamp createDate;
     private String subject;
+    @ManyToOne
     private Project project;
     private String description;
+    @ManyToOne
     private Status status;
+    @ManyToOne
     private Priority priority;
+    @OneToMany
     private User user;
 
     public Task() {
@@ -34,7 +39,7 @@ public class Task {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(Timestamp createDate) {
         this.createDate = createDate;
     }
 

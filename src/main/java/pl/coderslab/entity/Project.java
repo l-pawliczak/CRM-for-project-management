@@ -1,11 +1,11 @@
 package pl.coderslab.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.URL;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,14 +14,16 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @CreationTimestamp
     private Date createDate;
     private String name;
     private String description;
     @URL
     private String website;
     private String identity;
-    private List<User> users;
-    private boolean acitve;
+    @ManyToMany
+    private List<User> users = new ArrayList<>();
+    private boolean active;
 
     public Project() {
     }
@@ -38,7 +40,7 @@ public class Project {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(Timestamp createDate) {
         this.createDate = createDate;
     }
 
@@ -82,11 +84,11 @@ public class Project {
         this.users = users;
     }
 
-    public boolean isAcitve() {
-        return acitve;
+    public boolean isActive() {
+        return active;
     }
 
-    public void setAcitve(boolean acitve) {
-        this.acitve = acitve;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
