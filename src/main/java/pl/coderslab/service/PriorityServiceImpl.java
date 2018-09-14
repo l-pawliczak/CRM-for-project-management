@@ -23,4 +23,18 @@ public class PriorityServiceImpl implements PriorityService {
     public Priority save(Priority priority) {
         return priorityRepository.save(priority);
     }
+
+    @Override
+    public Priority setActiveOppositeToCurrent(int id) {
+        Priority priority = priorityRepository.getOne(id);
+        priority.setActive(!priority.isActive());
+        save(priority);
+
+        return priority;
+    }
+
+    @Override
+    public List<Priority> getAllActive() {
+        return priorityRepository.findAllByActiveTrue();
+    }
 }
