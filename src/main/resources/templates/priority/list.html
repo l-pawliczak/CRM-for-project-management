@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="template">
+<body>
+<section layout:fragment="content">
+    <table>
+        <thead>
+        <th>Nazwa</th>
+        <th>Aktywny</th>
+        </thead>
+        <tr th:each="priority: ${priorities}">
+            <td th:text="${priority.name}"></td>
+            <td th:text="${priority.active}"></td>
+            <td><a th:href="@{/priority/edit/{id}(id=${priority.id})}">Edytuj</a></td>
+        </tr>
+    </table>
+</section>
+</body>
+</html>

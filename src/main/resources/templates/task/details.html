@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="template">
+<body>
+<!--/*@thymesVar id="task" type="pl.coderslab.entity.Task"*/-->
+<section layout:fragment="content" th:object="${task}">
+    <table>
+        <thead>
+            <th>ID</th>
+            <th>Subject</th>
+            <th>Description</th>
+            <th>Assigned user</th>
+            <th>Status</th>
+            <th>Priority</th>
+            <th>Actions</th>
+        </thead>
+        <tr>
+            <td th:text="*{id}"></td>
+            <td th:text="*{subject}"></td>
+            <td th:text="*{description}"></td>
+            <td th:text="*{user.name}"></td>
+            <td th:text="*{status.name}"></td>
+            <td th:text="*{priority.name}"></td>
+            <td><a th:href="@{/task/edit/{task_id}(task_id=${task.id})}" th:text="'Edit task'"></a></td>
+        </tr>
+    </table>
+    <p th:text="*{description}"></p>
+</section>
+</body>
+</html>

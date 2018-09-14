@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="template">
 <body>
-
+<section layout:fragment="content">
+    <table>
+        <thead>
+        <th>Nazwa</th>
+        <th>Opis</th>
+        <th>Uzytkownik</th>
+        </thead>
+        <tr th:each="task: ${tasks}">
+            <td th:text="${task.subject}"></td>
+            <td th:text="${task.description}"></td>
+            <td th:text="${task.getUser().name} ${task.getUser().surname}"></td>
+            <td><a th:href="@{/task/{id}(id=${task.id})}">Szczegoly</a></td>
+            <td><a th:href="@{/task/edit/{id}(id=${task.id})}">Edytuj</a></td>
+        </tr>
+    </table>
+</section>
 </body>
 </html>

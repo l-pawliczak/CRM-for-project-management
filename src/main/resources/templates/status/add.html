@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="template">
+<body>
+<section layout:fragment="content">
+    <!--/*@thymesVar id="status" type="pl.coderslab.entity.Project"*/-->
+    <form th:action="@{/status/add}" method="post" th:object="${status}">
+        <p>Name: <input th:type="text" th:field="*{name}"/></p>
+        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</p>
+        <p><input type="submit" value="Submit"/></p>
+    </form>
+</section>
+</body>
+</html>

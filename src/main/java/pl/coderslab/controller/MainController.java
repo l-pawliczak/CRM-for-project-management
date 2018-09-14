@@ -21,7 +21,7 @@ public class MainController {
 
     @GetMapping("")
     public String home(Model model) {
-        model.addAttribute("logs", actionService.findFirst25ByOrderByTimestampDesc());
+        model.addAttribute("actions", actionService.findFirst25ByOrderByTimestampDesc());
         model.addAttribute("projects", projectService.findFirst5ByOrderByCreateDateDesc());
 
         return "index";

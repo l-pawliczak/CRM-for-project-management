@@ -24,7 +24,7 @@ public class PriorityController {
     }
 
     @GetMapping("")
-    public String showAll(Model model){
+    public String showAll(Model model) {
         model.addAttribute("priorities", priorityService.findAll());
 
         return "priority/list";
@@ -46,11 +46,10 @@ public class PriorityController {
         return "redirect:/priority";
     }
 
-
     @GetMapping(path = "/{id}/change")
     public String activate(@PathVariable int id) {
         priorityService.setActiveOppositeToCurrent(id);
 
-        return "redirect:/priority/all";
+        return "redirect:/priority";
     }
 }

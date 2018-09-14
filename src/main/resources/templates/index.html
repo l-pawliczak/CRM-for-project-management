@@ -11,6 +11,14 @@
             <td th:text="${project.name}"></td>
         </tr>
     </table>
+    <table>
+        <thead>
+        <th>Last 25 actions</th>
+        </thead>
+        <tr th:each="action: ${actions}">
+            <td th:text="${action.message}"></td>
+        </tr>
+    </table>
 </section>
 </body>
 </html>

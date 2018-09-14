@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="template">
+<body>
+<!--/*@thymesVar id="project" type="pl.coderslab.entity.Project"*/-->
+<section layout:fragment="content" th:object="${project}">
+    <table>
+        <thead>
+        <th>ID</th>
+        <th>Nazwa</th>
+        <th>Identyfikator</th>
+        <th>Data utworzenia</th>
+        <th>Akcje</th>
+        </thead>
+        <tr>
+            <td th:text="*{id}"></td>
+            <td th:text="*{name}"></td>
+            <td th:text="*{identifier}"></td>
+            <td th:text="*{creationTime}"></td>
+            <td><a th:href="@{/task/{id}(id=${project.id})}" th:text="'Pokaz zadania'"></a>
+                <a th:href="@{/task/add/{id}(id=*{id})}" th:text="'Dodaj zadanie'">Dodaj zadanie</a>
+            </td>
+        </tr>
+    </table>
+    <p th:if="*{description}" th:text="'Opis: '+*{description}"></p>
+    <a th:href="@{/project/{project_id}/add_user(project_id=${project.id})}"> (Add user) </a>
+</section>
+</body>
+</html>
