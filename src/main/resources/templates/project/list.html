@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="template">
+<body>
+<section layout:fragment="content">
+    <table>
+        <thead>
+        <th>Data</th>
+        <th>Nazwa</th>
+        <th>Indentyfikator</th>
+        <th>Akcje</th>
+        </thead>
+        <tr th:each="project: ${projects}">
+            <td th:text="${project.createDate}"></td>
+            <td th:text="${project.name}"></td>
+            <td th:text="${project.identity}"></td>
+            <td><a th:href="@{/task/project/{id}(id=${project.id})}">Pokaz zadania</a></td>
+            <td><a th:href="@{/project/{id}(id=${project.id})}">Pokaz szczegóły</a></td>
+            <td><a th:href="@{/project/edit/{id}(id=${project.id})}">Edytuj</a></td>
+        </tr>
+    </table>
+</section>
+</body>
+</html>

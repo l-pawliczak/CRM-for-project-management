@@ -21,7 +21,7 @@ public class Task {
     private Status status;
     @ManyToOne
     private Priority priority;
-    @OneToMany
+    @ManyToOne
     private User user;
 
     public Task() {

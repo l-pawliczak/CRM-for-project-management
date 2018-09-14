@@ -5,9 +5,9 @@ import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Project {
@@ -22,7 +22,7 @@ public class Project {
     private String website;
     private String identity;
     @ManyToMany
-    private List<User> users = new ArrayList<>();
+    private Set<User> users = new HashSet<>();
     private boolean active;
 
     public Project() {
@@ -76,11 +76,11 @@ public class Project {
         this.identity = identity;
     }
 
-    public List<User> getUsers() {
+    public Set getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(Set users) {
         this.users = users;
     }
 

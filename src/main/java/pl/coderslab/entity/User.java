@@ -3,6 +3,8 @@ package pl.coderslab.entity;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -17,6 +19,10 @@ public class User {
     private String surname;
     @NotBlank
     private String password;
+    @OneToMany
+    private Set<Task> tasks;
+    @ManyToMany
+    private Set<Project> projects = new HashSet<>();
 
     public User() {
     }
@@ -59,5 +65,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
     }
 }

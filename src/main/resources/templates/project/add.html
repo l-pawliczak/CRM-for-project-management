@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="template">
+<body>
+<section layout:fragment="content">
+    <form th:action="@{/project/add}" th:object="${project}" method="post">
+        <ul th:if="${#fields.hasErrors('*')}">
+            <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+        </ul>
+        <p>Name: <input type="text" th:field="*{name}"/></p>
+        <p>Description: <input type="text" th:field="*{description}"/></p>
+        <p>Website: <input type="text" th:field="*{website}"/></p>
+        <p>
+            <select th:field="*{users}" multiple="multiple">
+                <option th:each="user : ${users}"
+                        th:value="${user.id}"
+                        th:utext="${user.name} ${user.surname}"/>
+            </select>
+        </p>
+        <p>Active: <input type="checkbox" th:field="*{active}"/></p>
+        <p><input type="submit" value="Submit"/></p>
+    </form>
+</section>
+</body>
+</html>
