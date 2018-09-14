@@ -24,7 +24,7 @@ public class PriorityController {
     }
 
     @GetMapping("")
-    public String showAllPriorities(Model model){
+    public String showAll(Model model){
         model.addAttribute("priorities", priorityService.findAll());
 
         return "priority/list";
@@ -40,7 +40,7 @@ public class PriorityController {
     @PostMapping("/add")
     public String addPriority(@Valid Priority priority, BindingResult result) {
         if (result.hasErrors()) {
-            return "/priority/add";
+            return "priority/add";
         }
         priorityService.save(priority);
         return "redirect:/priority";
