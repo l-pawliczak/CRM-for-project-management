@@ -4,8 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import pl.coderslab.entity.Action;
 import pl.coderslab.entity.Project;
 import pl.coderslab.entity.User;
+import pl.coderslab.service.ActionService;
 import pl.coderslab.service.ProjectService;
 import pl.coderslab.service.UserService;
 
@@ -17,10 +19,12 @@ import java.util.Set;
 public class ProjectController {
     private final ProjectService projectService;
     private final UserService userService;
+    private final ActionService actionService;
 
-    public ProjectController(ProjectService projectService, UserService userService) {
+    public ProjectController(ProjectService projectService, UserService userService, ActionService actionService) {
         this.projectService = projectService;
         this.userService = userService;
+        this.actionService = actionService;
     }
 
     @GetMapping("")
@@ -43,9 +47,11 @@ public class ProjectController {
             return "project/add";
         }
         project.setIdentity(project.getName().replaceAll("[^\\p{ASCII}]", "").replaceAll("\\s", "-"));
+
+        actionService.save(new Action("New project added: " + project.getName(), project));
         projectService.save(project);
 
-        return "redirect: /project";
+        return "redirect:/project";
     }
 
     @GetMapping("/{id}")
@@ -59,7 +65,7 @@ public class ProjectController {
     public String editForm(@PathVariable int id, Model model) {
         model.addAttribute("project", projectService.findById(id));
 
-        return "/project/edit";
+        return "project/edit";
     }
 
     @PostMapping(path = "/edit")
@@ -67,6 +73,7 @@ public class ProjectController {
         if (result.hasErrors()) {
             return "/project/edit";
         }
+        actionService.save(new Action("Project edited", project));
         projectService.save(project);
 
         return "redirect:/project";
@@ -77,7 +84,7 @@ public class ProjectController {
         Project project = projectService.findById(id);
         model.addAttribute("project", project);
 
-        return "/project/add_user";
+        return "project/add_user";
     }
 
     @PostMapping(path = "/{id}/user/add")
@@ -87,7 +94,7 @@ public class ProjectController {
         return "redirect:/project/" + id;
     }
 
-    @GetMapping(path = "/{projectId}/user/delete/{userId}")
+    @GetMapping(path = "/{projectId}/user/{userId}/delete")
     public String removeUser(@PathVariable int projectId, @PathVariable int userId) {
         projectService.removeUser(projectId, userId);
 

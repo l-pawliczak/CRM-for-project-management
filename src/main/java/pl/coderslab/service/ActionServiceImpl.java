@@ -20,4 +20,9 @@ public class ActionServiceImpl implements ActionService {
     public List<Action> findFirst25ByOrderByTimestampDesc() {
         return actionRepository.findFirst25ByOrderByTimestampDesc();
     }
+
+    @Override
+    public Action save(Action action) {
+        return actionRepository.save(action);
+    }
 }

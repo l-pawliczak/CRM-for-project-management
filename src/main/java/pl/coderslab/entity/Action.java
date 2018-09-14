@@ -22,6 +22,11 @@ public class Action {
     public Action() {
     }
 
+    public Action(String message, Project project) {
+        this.message = message;
+        this.project = project;
+    }
+
     public int getId() {
         return id;
     }
