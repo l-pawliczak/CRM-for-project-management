@@ -3,10 +3,7 @@ package pl.coderslab.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.entity.Project;
 import pl.coderslab.entity.Task;
 import pl.coderslab.service.ProjectService;
@@ -49,5 +46,29 @@ public class TaskController {
         model.addAttribute("tasks", taskService.findAll());
 
         return "task/list";
+    }
+
+    @GetMapping(path = "/{id}")
+    public String details(@PathVariable int id, Model model) {
+        model.addAttribute("task", taskService.findOne(id));
+
+        return "task/details";
+    }
+
+    @GetMapping(path = "/edit/{id}")
+    public String editForm(@PathVariable int id, Model model) {
+        model.addAttribute("task", taskService.findOne(id));
+
+        return "task/edit";
+    }
+
+    @PostMapping(path = "/edit")
+    public String edit(@Valid Task task, BindingResult result) {
+        if (result.hasErrors()) {
+            return "/task/edit";
+        }
+        taskService.save(task);
+
+        return "redirect:/task";
     }
 }

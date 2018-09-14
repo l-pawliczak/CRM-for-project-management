@@ -23,4 +23,14 @@ public class TaskServiceImpl implements TaskService {
     public List<Task> findAll() {
         return taskRepository.findAll();
     }
+
+    @Override
+    public void delete(Task task) {
+        taskRepository.delete(task);
+    }
+
+    @Override
+    public Task findOne(int id) {
+        return taskRepository.findOne(id);
+    }
 }
